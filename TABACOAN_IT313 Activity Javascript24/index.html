@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Writing DOM</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+    // Creating a form element
+    const form = document.createElement('form');
+    form.id = 'registrationForm';
+    
+    // Creating the input fields
+    const firstName = document.createElement('input');
+    firstName.type = 'text';
+    firstName.name = 'firstName';
+    firstName.placeholder = 'First Name';
+    
+    const lastName = document.createElement('input');
+    lastName.type = 'text';
+    lastName.name = 'lastName';
+    lastName.placeholder = 'Last Name';
+    
+    const email = document.createElement('input');
+    email.type = 'email';
+    email.name = 'email';
+    email.placeholder = 'Email Address';
+    
+    const password = document.createElement('input');
+    password.type = 'password';
+    password.name = 'password';
+    password.placeholder = 'Password';
+    
+    const confirmPassword = document.createElement('input');
+    confirmPassword.type = 'password';
+    confirmPassword.name = 'confirmPassword';
+    confirmPassword.placeholder = 'Confirm Password';
+    
+    // Creating a submit button
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Register';
+    
+    // Appending the inputs and button to the form
+    form.appendChild(firstName);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(lastName);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(email);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(password);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(confirmPassword);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(submitButton);
+    
+    // Adding CSS styles
+    const style = document.createElement('style');
+    style.textContent = `
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #3C3D37;
+        }
+        #registrationForm {
+            background-color: grey;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #registrationForm input {
+            width: 100%;
+            padding: 10px;
+            margin: -2px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        #registrationForm button {
+            padding: 10px;
+            background-color: #3C3D37;
+            color: #ECDFCC;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Appending the form to the app div
+    document.getElementById('app').appendChild(form);
+
+    // Email validation
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const emailValue = email.value;
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(emailValue)) {
+            alert('Please enter a valid email address. Example: name@domain.com or name@domain.com.ph');
+            return false;
+        }
+
+        if (password.value !== confirmPassword.value) {
+            alert('Passwords do not match!');
+            return false;
+        }
+        
+        alert('Registration successful!');
+    });
+</script>
+
+</body>
+</html>
